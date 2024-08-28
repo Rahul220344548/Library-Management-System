@@ -17,6 +17,10 @@ public class Book {
 		return bookID;
 	}
 	
+	public void setBookID(int newID) {
+		this.bookID = newID;
+	}
+	
 	
 	
 	
