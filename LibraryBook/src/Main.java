@@ -3,7 +3,6 @@ import java.util.Scanner;
 public class Main {
 	
 	
-	
 	public static void main(String[] args) {
 		
 		Main main = new Main();
@@ -35,7 +34,7 @@ public class Main {
 		System.out.println("  5. Display all books");
 		System.out.println("  6. Display all users");
 		System.out.println("  7. Save & Exit");
-		System.out.println("===============================");  
+		System.out.println("=======================================");  
 		System.out.print("Enter: ");
 		
 	}
