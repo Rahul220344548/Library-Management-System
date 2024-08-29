@@ -1,6 +1,5 @@
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.*;
 import java.time.LocalDate;
@@ -10,14 +9,8 @@ import java.time.LocalDateTime;
 public class Library {
 	
 	Scanner input = new Scanner(System.in);
-	Map<Integer, Book> bookData = new HashMap<>();
-	Map<Integer, User> userData = new HashMap<>();
 	private static int userIDCounter = 1;
-	
-	public Library() {
-        userData = new HashMap<>();
-    }
-	
+	ArrayList<User> userData = new ArrayList<>();
 	
 	public void addNewBook() {
 		String name;
@@ -36,19 +29,10 @@ public class Library {
 	
 	public void addUser(/*User*/) {
 		
-        System.out.print("Enter name: ");
-        String name = input.next();
-        
-        System.out.println("Enter address: ");
-        String address = input.next();
-        
-        User newUser = new User(userIDCounter++, name, address);
-        
-        userData.put(newUser.getUserID(), newUser);
+ 
         writeUsersToFile();
-        System.out.println("User added successfully.");
         
-
+			
 //		readUsersFile();
 	
 	}
@@ -65,17 +49,7 @@ public class Library {
 		
 	}
 	
-	public void displayUsers() {
-		if (userData.isEmpty()) {
-            System.out.println("No users in the library.");
-            return;
-        }
-        
-        for (User user : userData.values()) {
-            System.out.println("ID: " + user.getUserID() + ", Name: " + user.getName() + ", Address: " + user.getAddress());
-        }
-	}
-	
+	public void displayUsers() {}
 	private void readUsersFile() {
 		String file = "C:\\Users\\rahul\\git\\repository\\LibraryBook\\src\\Users.csv";
 		BufferedReader reader = null;
@@ -113,26 +87,25 @@ public class Library {
 	}
 	
 	private void writeUsersToFile() {
+		
+		User rahul = new User(1,"Rahul","Fake Street");
+        User Tom = new User(2,"Tom","Fake Street");
+        
 		String file = "C:\\Users\\rahul\\git\\repository\\LibraryBook\\src\\Users.csv";
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
-            // Write the header
-            writer.write("UserID,Name,Address,membership-date,isIssued");
-            writer.newLine();
-            
-            // Write each user
-            for (User user : userData.values()) {
-                writer.write(user.getUserID() + ","
-                        + user.getName() + ","
-                        + user.getAddress() + ","
-                        + "N/A," // Placeholder for membership-date
-                        + user.getisIssued());
+        	
+            userData.add(rahul);
+            userData.add(Tom);
+            for (User user : userData) {
+            	writer.write(user.getUserID() + ","
+                        + user.getName());
                 writer.newLine();
             }
             
-            System.out.println("User data written to file successfully.");
-        } catch (IOException e) {
-            e.printStackTrace();
+        }catch (IOException e) {
+        	e.printStackTrace();
         }
+		
 	}
 	
 }
