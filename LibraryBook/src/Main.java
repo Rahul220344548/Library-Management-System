@@ -1,6 +1,14 @@
+import java.util.HashMap;
+import java.io.File;  // Import the File class
+import java.io.FileNotFoundException;  // Import this class to handle errors
 import java.util.InputMismatchException;
+import java.util.Map;
 import java.util.Scanner;
+
 public class Main {
+	Scanner input = new Scanner(System.in);
+	Map<Integer, Book> bookData = new HashMap<>();
+	Map<Integer, User> userData = new HashMap<>();
 	
 	
 	public static void main(String[] args) {
@@ -63,12 +71,14 @@ public class Main {
     }
 
     public void handleUserOption(int userOption) {
-    	
+    	Library myLib = new Library();
     	 switch (userOption) {
     	 	case 1:
     	 		System.out.println("Add a new book");
     	 		break;	
     	 	case 2:
+    	 		
+    	 		myLib.addUser();
     	 		System.out.println("Add a new user");
     	 		break;
     	 	case 3:
@@ -81,7 +91,8 @@ public class Main {
     	 		System.out.println("Display all books");
     	 		break;
     	 	case 6:
-    	 		System.out.println("Display all users");
+    	 		myLib.displayUsers();
+//    	 		System.out.println("Display all users");
     	 		break;
     	 	case 7:
     	 		System.out.println("EXIT...");

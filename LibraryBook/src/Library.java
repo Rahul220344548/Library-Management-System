@@ -25,7 +25,7 @@ public class Library {
 //		User newUser = new User();
 		System.out.print("Enter a name: ");
 		name = input.next();
-		userData.put(1, new User(1,name,false));
+		
 		
 		System.out.print(userData.get(1));
 	}
@@ -42,10 +42,13 @@ public class Library {
         System.out.println("Enter address: ");
         String address = input.next();
         
+        User newUser = new User(userIDCounter++, name, address);
         
+        userData.put(newUser.getUserID(), newUser);
+        writeUsersToFile();
+        System.out.println("User added successfully.");
         
-//		userData.put(1, new User(1,"Rahul",false));
-//
+
 //		readUsersFile();
 	
 	}
@@ -62,8 +65,15 @@ public class Library {
 		
 	}
 	
-	private void displayUsers() {
-		
+	public void displayUsers() {
+		if (userData.isEmpty()) {
+            System.out.println("No users in the library.");
+            return;
+        }
+        
+        for (User user : userData.values()) {
+            System.out.println("ID: " + user.getUserID() + ", Name: " + user.getName() + ", Address: " + user.getAddress());
+        }
 	}
 	
 	private void readUsersFile() {
@@ -101,4 +111,28 @@ public class Library {
         
         return formattedDateTime;
 	}
+	
+	private void writeUsersToFile() {
+		String file = "C:\\Users\\rahul\\git\\repository\\LibraryBook\\src\\Users.csv";
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+            // Write the header
+            writer.write("UserID,Name,Address,membership-date,isIssued");
+            writer.newLine();
+            
+            // Write each user
+            for (User user : userData.values()) {
+                writer.write(user.getUserID() + ","
+                        + user.getName() + ","
+                        + user.getAddress() + ","
+                        + "N/A," // Placeholder for membership-date
+                        + user.getisIssued());
+                writer.newLine();
+            }
+            
+            System.out.println("User data written to file successfully.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+	}
+	
 }
