@@ -29,11 +29,17 @@ public class Library {
 	
 	public void addUser(/*User*/) {
 		
- 
-        writeUsersToFile();
-        
-			
-//		readUsersFile();
+		
+		System.out.print("Enter new user's name: ");
+		String inputName = input.next();
+		
+		
+		System.out.print("Enter new user's address: ");
+		String inputAddress = input.next();
+		
+		writeUsersToFile(inputName,inputAddress);
+		
+
 	
 	}
 	private void issueBook(/*bookID, userID*/) {
@@ -49,7 +55,9 @@ public class Library {
 		
 	}
 	
-	public void displayUsers() {}
+	public void displayUsers() {
+		readUsersFile();
+	}
 	private void readUsersFile() {
 		String file = "C:\\Users\\rahul\\git\\repository\\LibraryBook\\src\\Users.csv";
 		BufferedReader reader = null;
@@ -86,19 +94,20 @@ public class Library {
         return formattedDateTime;
 	}
 	
-	private void writeUsersToFile() {
+	private void writeUsersToFile(String inName,String inAddress) {
 		
-		User rahul = new User(1,"R","Fake Street");
-        User Tom = new User(2,"Tom","Fake Street");
+		
+		User newUser = new User(userIDCounter++,inName,inAddress);
+		
         
 		String file = "C:\\Users\\rahul\\git\\repository\\LibraryBook\\src\\Users.csv";
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file,true))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
         	
-            userData.add(rahul);
-            userData.add(Tom);
+            userData.add(newUser);
             for (User user : userData) {
             	writer.write(user.getUserID() + ","
-                        + user.getName());
+                        + user.getName() + ","
+                        + user.getAddress());
                 writer.newLine();
             }
             
