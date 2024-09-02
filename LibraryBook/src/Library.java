@@ -88,11 +88,11 @@ public class Library {
 	
 	private void writeUsersToFile() {
 		
-		User rahul = new User(1,"Rahul","Fake Street");
+		User rahul = new User(1,"R","Fake Street");
         User Tom = new User(2,"Tom","Fake Street");
         
 		String file = "C:\\Users\\rahul\\git\\repository\\LibraryBook\\src\\Users.csv";
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file,true))) {
         	
             userData.add(rahul);
             userData.add(Tom);
