@@ -30,20 +30,24 @@ public class Library {
 	public void addUser(/*User*/) {
 		
 		
+		boolean isValid = false;
+		String inputAddress = null;
 		
+
 		System.out.print("Enter new user's name: ");
 		String inputName = input.nextLine();
-		
-		
-		System.out.print("Enter new user's address: ");
-		String inputAddress = input.nextLine();
-		
-		if (Utility.isValidAddress(inputAddress)) {
-            System.out.println("The string is a valid address.");
-        } else {
-            System.out.println("The string is not a valid address.");
-        }
-		
+	
+		while (!isValid) {
+			System.out.print("Enter new user's address: ");
+            inputAddress = input.nextLine();
+			
+            if (Utility.isValidAddress(inputAddress)) {
+                System.out.println("The string is a valid address.");
+                isValid = true; // Address is valid, exit the loop
+            } else {
+                System.out.println("The string is not a valid address. Please try again.");
+            }
+		}
 		User newUser = new User(userFileManager.getNextUserID(), inputName, inputAddress);
         userData.add(newUser);
         userFileManager.writeUsersToFile(userData);
