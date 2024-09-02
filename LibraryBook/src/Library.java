@@ -1,5 +1,6 @@
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 import java.io.*;
@@ -15,6 +16,9 @@ public class Library {
 
 	
 	public void addNewBook() {
+		Utility generate = new Utility();
+		int uniqueID = generate.generateFourDigitNumber();
+		
 		String bookTitle;
 		String bookAuthor;
 		
@@ -24,13 +28,14 @@ public class Library {
 		System.out.print("Enter Book's Author:  ");
 		bookAuthor = input.nextLine();
 		
-		Book newBook = new Book(bookFileManager.getNextUserID(),bookTitle,bookAuthor);
+		Book newBook = new Book(bookFileManager.getNextUserID(),uniqueID,bookTitle,bookAuthor);
 		bookData.add(newBook);
 		bookFileManager.writeNewBookToFile(bookData);
 		
 	}
 	
-	private void removeBook(/*Book*/) {
+	public void removeBook(/*Book*/) {
+		
 		
 	}
 	

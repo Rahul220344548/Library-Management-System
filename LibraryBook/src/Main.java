@@ -26,7 +26,7 @@ public class Main {
 			userOption = getUserOption(input);
 			handleUserOption(userOption);
 			
-		}while (userOption!=7);
+		}while (userOption!=8);
 		System.out.println("Exiting... Goodbye!");
 		input.close();
 	}
@@ -37,11 +37,12 @@ public class Main {
 		
 		System.out.println("  1. Add a new book");
 		System.out.println("  2. Add a new user");
-		System.out.println("  3. Issue a book to a user");
-		System.out.println("  4. Return a book");
-		System.out.println("  5. Display all books");
-		System.out.println("  6. Display all users");
-		System.out.println("  7. Save & Exit");
+		System.out.println("  3. remove a book");
+		System.out.println("  4. Issue a book to a user");
+		System.out.println("  5. Return a book");
+		System.out.println("  6. Display all books");
+		System.out.println("  7. Display all users");
+		System.out.println("  8. Save & Exit");
 		System.out.println("=======================================");  
 		System.out.print("Enter: ");
 		
@@ -55,7 +56,7 @@ public class Main {
     	while (!validInput) {
             try {
                 option = input.nextInt();
-                if (option < 1 || option > 7) {
+                if (option < 1 || option > 8) {
                     System.out.println("Invalid option. Please enter a number between 1 and 7.");
                     System.out.print("Enter: ");
                 } else {
@@ -81,20 +82,23 @@ public class Main {
     	 		
     	 		myLib.addUser();
     	 		break;
-    	 	case 3:
-    	 		System.out.println("Issue a book to a user");
+    	 	case 3: 
+    	 		myLib.removeBook();
     	 		break;
     	 	case 4:
-    	 		System.out.println("Return a book");
+    	 		System.out.println("Issue a book to a user");
     	 		break;
     	 	case 5:
-    	 		myLib.displayBooks();
+    	 		System.out.println("Return a book");
     	 		break;
     	 	case 6:
+    	 		myLib.displayBooks();
+    	 		break;
+    	 	case 7:
     	 		myLib.displayUsers();
 //    	 		System.out.println("Display all users");
     	 		break;
-    	 	case 7:
+    	 	case 8:
     	 		System.out.println("EXIT...");
     	 		break;
     	 	 default:  

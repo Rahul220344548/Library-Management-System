@@ -1,5 +1,6 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -22,5 +23,13 @@ public class Utility {
         Matcher matcher = pattern.matcher(input);
 
         return matcher.matches();
+    }
+	
+	public static int generateFourDigitNumber() {
+        Random random = new Random();
+        // Generate a number between 1000 and 9999
+        int min = 1000;
+        int max = 9999;
+        return random.nextInt(max - min + 1) + min;
     }
 }

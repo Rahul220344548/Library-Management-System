@@ -64,6 +64,7 @@ public class FileManager {
 		try (BufferedWriter writer = new BufferedWriter (new FileWriter(filePath,true))) {
 			for (Book book : bookData) {
 				writer.write(book.getBookID() + ","
+						+ book.getUniqueID() + ","
 						+ book.getTitle() + ","
 						+ book.getAuthor() + ","
 						+ book.getIsIssued());
