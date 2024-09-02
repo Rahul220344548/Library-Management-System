@@ -5,9 +5,11 @@ import java.io.*;
 public class FileManager {
 	
 	private String filePath;
+	private int userIDCounter;
 	
 	public FileManager(String filePath) {
         this.filePath = filePath;
+        initializeUserIDCounter();
     }
 	
 	public void writeUsersToFile(ArrayList<User> userData) {
@@ -39,5 +41,26 @@ public class FileManager {
         }
     }
 	
+	private void initializeUserIDCounter() {
+		try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            int maxID = 0;
+            while ((line = reader.readLine()) != null) {
+                String[] fields = line.split(",");
+                int currentID = Integer.parseInt(fields[0]); // Assume userID is the first field
+                if (currentID > maxID) {
+                    maxID = currentID;
+                }
+            }
+            userIDCounter = maxID + 1; // Start from the next ID
+        } catch (IOException e) {
+            e.printStackTrace();
+            userIDCounter = 1; // Default to 1 if the file is empty or not found
+        }
+	}
+	
+	public int getNextUserID() {
+        return userIDCounter++;
+    }
 
 }

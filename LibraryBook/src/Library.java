@@ -8,7 +8,6 @@ import java.io.*;
 public class Library {
 	
 	Scanner input = new Scanner(System.in);
-	private static int userIDCounter = 1;
 	ArrayList<User> userData = new ArrayList<>();
 	FileManager userFileManager = new FileManager("C:\\Users\\rahul\\git\\repository\\LibraryBook\\src\\Users.csv");
 	
@@ -30,6 +29,8 @@ public class Library {
 	
 	public void addUser(/*User*/) {
 		
+		
+		
 		System.out.print("Enter new user's name: ");
 		String inputName = input.nextLine();
 		
@@ -43,7 +44,7 @@ public class Library {
             System.out.println("The string is not a valid address.");
         }
 		
-		User newUser = new User(userIDCounter++, inputName, inputAddress);
+		User newUser = new User(userFileManager.getNextUserID(), inputName, inputAddress);
         userData.add(newUser);
         userFileManager.writeUsersToFile(userData);
 	
