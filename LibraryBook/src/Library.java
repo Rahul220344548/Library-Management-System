@@ -1,6 +1,8 @@
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.io.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -31,11 +33,17 @@ public class Library {
 		
 		
 		System.out.print("Enter new user's name: ");
-		String inputName = input.next();
+		String inputName = input.nextLine();
 		
 		
 		System.out.print("Enter new user's address: ");
-		String inputAddress = input.next();
+		String inputAddress = input.nextLine();
+		
+		if (isValidAddress(inputAddress)) {
+            System.out.println("The string is a valid address.");
+        } else {
+            System.out.println("The string is not a valid address.");
+        }
 		
 		writeUsersToFile(inputName,inputAddress);
 		
@@ -99,22 +107,29 @@ public class Library {
 		
 		User newUser = new User(userIDCounter++,inName,inAddress);
 		
-        
 		String file = "C:\\Users\\rahul\\git\\repository\\LibraryBook\\src\\Users.csv";
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
         	
-            userData.add(newUser);
-            for (User user : userData) {
-            	writer.write(user.getUserID() + ","
-                        + user.getName() + ","
-                        + user.getAddress());
-                writer.newLine();
-            }
+        	userData.add(newUser);
             
+        	writer.write(newUser.getUserID() + ","
+                    + newUser.getName() + ","
+                    + newUser.getAddress());
+        	writer.newLine();
+        	
         }catch (IOException e) {
         	e.printStackTrace();
         }
 		
 	}
 	
+	public static boolean isValidAddress(String input) {
+        // This is a basic example; real-world addresses can be much more complex.
+        String regex = "\\d+\\s+([A-Za-z]+\\s?)+\\s*(Street|St|Avenue|Ave|Boulevard|Blvd|Road|Rd|Lane|Ln|Drive|Dr|Court|Ct|Place|Pl)?";
+
+        Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(input);
+
+        return matcher.matches();
+    }
 }
