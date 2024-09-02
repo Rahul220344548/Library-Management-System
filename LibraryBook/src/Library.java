@@ -24,7 +24,6 @@ public class Library {
 		System.out.print("Enter Book's Author:  ");
 		bookAuthor = input.nextLine();
 		
-		
 		Book newBook = new Book(bookFileManager.getNextUserID(),bookTitle,bookAuthor);
 		bookData.add(newBook);
 		bookFileManager.writeNewBookToFile(bookData);

@@ -63,7 +63,8 @@ public class FileManager {
 			for (Book book : bookData) {
 				writer.write(book.getBookID() + ","
 						+ book.getTitlte() + ","
-						+ book.getAuthor());
+						+ book.getAuthor() + ","
+						+ book.getIsIssued());
                 writer.newLine();
 			}
 		}catch (IOException e) {
