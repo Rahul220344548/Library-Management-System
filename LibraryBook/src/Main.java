@@ -74,12 +74,12 @@ public class Main {
     	Library myLib = new Library();
     	 switch (userOption) {
     	 	case 1:
-    	 		System.out.println("Add a new book");
+    	 		myLib.addNewBook();
+//    	 		System.out.println("Add a new book");
     	 		break;	
     	 	case 2:
     	 		
     	 		myLib.addUser();
-    	 		System.out.println("Add a new user");
     	 		break;
     	 	case 3:
     	 		System.out.println("Issue a book to a user");

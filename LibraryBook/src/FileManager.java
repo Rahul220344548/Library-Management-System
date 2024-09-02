@@ -1,5 +1,3 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.util.ArrayList;
 import java.io.*;
 public class FileManager {
@@ -59,8 +57,28 @@ public class FileManager {
         }
 	}
 	
+	public void writeNewBookToFile (ArrayList<Book> bookData) {
+		
+		try (BufferedWriter writer = new BufferedWriter (new FileWriter(filePath,true))) {
+			for (Book book : bookData) {
+				writer.write(book.getBookID() + ","
+						+ book.getTitlte() + ","
+						+ book.getAuthor());
+                writer.newLine();
+			}
+		}catch (IOException e) {
+            e.printStackTrace();
+        }
+		
+	}
 	public int getNextUserID() {
         return userIDCounter++;
     }
+	
+	public void clearBookFile() throws IOException {
+		PrintWriter writer = new PrintWriter(filePath); 
+		writer.print("");
+		writer.close();
+	}
 
 }

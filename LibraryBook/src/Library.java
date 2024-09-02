@@ -9,19 +9,26 @@ public class Library {
 	
 	Scanner input = new Scanner(System.in);
 	ArrayList<User> userData = new ArrayList<>();
+	ArrayList<Book> bookData = new ArrayList<>();
 	FileManager userFileManager = new FileManager("C:\\Users\\rahul\\git\\repository\\LibraryBook\\src\\Users.csv");
+	FileManager bookFileManager = new FileManager("C:\\Users\\rahul\\git\\repository\\LibraryBook\\src\\Books.csv");
 
-//	C:\\Users\\rahul\\git\\repository\\LibraryBook\\src\\Books.csv
 	
 	public void addNewBook() {
-		String name;
-		boolean isIssued = false;
-//		User newUser = new User();
-		System.out.print("Enter a name: ");
-		name = input.next();
+		String bookTitle;
+		String bookAuthor;
+		
+		System.out.print("Enter Book's Title:  ");
+		bookTitle = input.nextLine();
+		
+		System.out.print("Enter Book's Author:  ");
+		bookAuthor = input.nextLine();
 		
 		
-		System.out.print(userData.get(1));
+		Book newBook = new Book(bookFileManager.getNextUserID(),bookTitle,bookAuthor);
+		bookData.add(newBook);
+		bookFileManager.writeNewBookToFile(bookData);
+		
 	}
 	
 	private void removeBook(/*Book*/) {
@@ -71,6 +78,23 @@ public class Library {
 		userFileManager.readUsersFile();
 	}
 	
+	void clearBookFile() {
+		try {
+			bookFileManager.clearBookFile();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	void clearUserFile() {
+		try {
+			userFileManager.clearBookFile();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 	
 	
