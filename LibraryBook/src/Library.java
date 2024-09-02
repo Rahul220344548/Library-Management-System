@@ -69,8 +69,8 @@ public class Library {
 		
 	}
 	
-	private void displayBooks() {
-		
+	public void displayBooks() {
+		bookFileManager.readUsersFile();
 	}
 	
 	public void displayUsers() {

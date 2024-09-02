@@ -57,12 +57,14 @@ public class FileManager {
         }
 	}
 	
+	
+	
 	public void writeNewBookToFile (ArrayList<Book> bookData) {
 		
 		try (BufferedWriter writer = new BufferedWriter (new FileWriter(filePath,true))) {
 			for (Book book : bookData) {
 				writer.write(book.getBookID() + ","
-						+ book.getTitlte() + ","
+						+ book.getTitle() + ","
 						+ book.getAuthor() + ","
 						+ book.getIsIssued());
                 writer.newLine();

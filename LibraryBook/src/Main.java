@@ -88,7 +88,7 @@ public class Main {
     	 		System.out.println("Return a book");
     	 		break;
     	 	case 5:
-    	 		System.out.println("Display all books");
+    	 		myLib.displayBooks();
     	 		break;
     	 	case 6:
     	 		myLib.displayUsers();

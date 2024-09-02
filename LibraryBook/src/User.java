@@ -1,3 +1,4 @@
+import java.util.List;
 
 public class User {
 	
@@ -5,6 +6,7 @@ public class User {
 	private String name;
 	private String address;
 	private boolean isIssued;
+//	private List<Book> checkedOutBooks;
 	
 	public User(int userID, String name,String address) {
 		this.userID = userID;
