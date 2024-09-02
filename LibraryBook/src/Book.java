@@ -21,7 +21,17 @@ public class Book {
 		this.bookID = newID;
 	}
 	
+	public String getTitlte() {
+		return title;
+	}
 	
+	public String getAuthor() {
+		return author;
+	}
+	
+	public boolean getIsIssued() {
+		return isIssued;
+	}
 	
 	
 	
