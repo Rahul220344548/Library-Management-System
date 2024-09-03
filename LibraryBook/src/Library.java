@@ -1,5 +1,6 @@
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -81,8 +82,17 @@ public class Library {
 	
 	public void issueBook(int bookID, int userID) {
 		
-		bookIssueManager.readBooksToArray();
-		userIssueManager.readUsersToArray();
+//		Utility.displayBookRecords(bookIssueManager.readBooksToArray());
+		
+		List<String[]> getBookElement = bookIssueManager.readBooksToArray();		
+		System.out.println(bookIssueManager.searchBookID(getBookElement, "4"));
+		
+		List<String[]> getUserElement = userIssueManager.readUsersToArray();
+		System.out.println(userIssueManager.searchBookID(getUserElement, "3"));
+		
+		
+		
+		
 		
 		
 	}

@@ -12,7 +12,7 @@ public class issueBookManager {
         this.filePath = filePath;
     }
 	
-	public void readBooksToArray() {
+	public List<String[]> readBooksToArray() {
 		
 		List<String[]> bookRecords = new ArrayList<>();
 		
@@ -27,10 +27,11 @@ public class issueBookManager {
 		}catch (IOException e){
 			e.printStackTrace();
 		}
-		Utility.displayBookRecords(bookRecords);
+		return bookRecords;
+//		Utility.displayBookRecords(bookRecords);
 	}
 	
-	public void readUsersToArray() {
+	public List<String[]> readUsersToArray() {
 		
 		List<String[]> userRecords = new ArrayList<>();
 		
@@ -43,9 +44,20 @@ public class issueBookManager {
 		}catch (IOException e){
 			e.printStackTrace();
 		}
-		Utility.displayUserRecords(userRecords);
+		return userRecords;
 		
 	}
+	
+	public static int searchBookID(List<String[]> bookRecords,String searchTerm) {
 		
+		int element;
+		for (int i = 0; i < bookRecords.size(); i++) {
+			if (bookRecords.get(i)[0].toString().equals(searchTerm)) {
+				element = i;
+				return element;
+			}
+		}
+		return -1;
+	}	
 		
 }
