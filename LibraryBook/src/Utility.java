@@ -1,6 +1,8 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -32,4 +34,38 @@ public class Utility {
         int max = 9999;
         return random.nextInt(max - min + 1) + min;
     }
+	
+	public static void checkISBNnumber(Scanner input) {
+		int firstCheck;
+		int secondCheck;
+		
+		System.out.println("----REMOVE BOOK-----");
+		do {
+			System.out.print("Enter ISBN number of book to remove: ");
+			firstCheck = input.nextInt();
+			System.out.print("Confirm ISBN number: ");
+			secondCheck = input.nextInt();
+		}while (firstCheck != secondCheck);
+		System.out.println("Removed Successfully!");
+		
+	}
+	
+	public static void displayBookRecords( List<String[]> bookRecords ) {
+		for (String[] record : bookRecords) {
+            System.out.println("ID : " + record[0]+" Unique ID: " + record[1] + " Title: " + record[2] + " Author: " + record[3]);
+        }
+	}
+	
+	public static int searchISBNnumber(List<String[]> bookRecords,String searchTerm) {
+		
+		int element;
+		for (int i = 0; i < bookRecords.size(); i++) {
+			if (bookRecords.get(i)[1].toString().equals(searchTerm)) {
+				element = i;
+				return element;
+			}
+		}
+		return -1;
+	}
+	
 }

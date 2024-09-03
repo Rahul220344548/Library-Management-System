@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 import java.io.*;
 public class FileManager {
 	
@@ -57,7 +58,9 @@ public class FileManager {
         }
 	}
 	
-	
+	public void getISBNnumber() {
+		
+	}
 	
 	public void writeNewBookToFile (ArrayList<Book> bookData) {
 		
@@ -75,6 +78,32 @@ public class FileManager {
         }
 		
 	}
+	
+	public void readRecord(String searchTerm) {
+		
+		List<String[]> bookRecords = new ArrayList<>();
+		
+		try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+			
+			String line;
+			while ((line = reader.readLine()) != null ) {
+				String[] bookRecord = line.split(",");
+				bookRecords.add(bookRecord);
+				System.out.println("Unique ID : " + bookRecord[1] );
+			}
+			
+		}catch (IOException e){
+			e.printStackTrace();
+		}
+			
+		System.out.println(Utility.searchISBNnumber(bookRecords, searchTerm));
+		bookRecords.remove(1);
+//		Utility.displayBookRecords(bookRecords);
+		
+		
+		
+	}
+	
 	public int getNextUserID() {
         return userIDCounter++;
     }

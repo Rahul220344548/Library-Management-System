@@ -35,6 +35,15 @@ public class Library {
 	}
 	
 	public void removeBook(/*Book*/) {
+		String searchTerm = "1953";
+		//Reads data into record 
+		bookFileManager.readRecord(searchTerm);
+		
+		//Search for term 1953
+		// create a function that searchs for term 1953 and returns the record element
+		// for example term 1953 is in element 2
+		
+		
 		
 		
 	}
