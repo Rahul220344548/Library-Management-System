@@ -42,8 +42,8 @@ public class Book {
 	public boolean getIsIssued() {
 		return isIssued;
 	}
-	public void setIssued(boolean isIssued) {
-        this.isIssued = isIssued;
+	public void setIssued() {
+        this.isIssued = true;
     }
 	
 	
