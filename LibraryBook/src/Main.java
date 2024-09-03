@@ -90,6 +90,7 @@ public class Main {
     	 		myLib.issueBook(7,1);
     	 		break;
     	 	case 5:
+//    	 		myLib.clearUserFile();
     	 		System.out.println("Return a book");
     	 		break;
     	 	case 6:

@@ -18,7 +18,9 @@ public class FileManager {
             for (User user : userData) {
                 writer.write(user.getUserID() + ","
                         + user.getName() + ","
-                        + user.getAddress());
+                        + user.getAddress() + ","
+                        + user.getisIssued() + ","
+                        + user.getCheckedOutBooks());
                 writer.newLine();
             }
         } catch (IOException e) {

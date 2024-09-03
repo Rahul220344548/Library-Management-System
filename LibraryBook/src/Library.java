@@ -80,6 +80,7 @@ public class Library {
 	
 	
 	public void issueBook(int bookID, int userID) {
+		
 		bookIssueManager.readBooksToArray();
 		userIssueManager.readUsersToArray();
 		
@@ -87,6 +88,7 @@ public class Library {
 	}
 	
 	private void returnBook(/*bookID, userID*/) {
+		
 		
 	}
 	
@@ -107,7 +109,7 @@ public class Library {
 		}
 	}
 	
-	void clearUserFile() {
+	public void clearUserFile() {
 		try {
 			userFileManager.clearBookFile();
 		} catch (IOException e) {

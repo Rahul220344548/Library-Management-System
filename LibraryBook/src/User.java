@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class User {
@@ -6,13 +7,14 @@ public class User {
 	private String name;
 	private String address;
 	private boolean isIssued;
-//	private List<Book> checkedOutBooks;
+	private List<Book> checkedOutBooks;
 	
 	public User(int userID, String name,String address) {
 		this.userID = userID;
 		this.name = name;
 		this.address = address;
 		this.isIssued = false;
+		this.checkedOutBooks = new ArrayList<>();
 	}
 	
 	public int getUserID() {
@@ -47,5 +49,21 @@ public class User {
 		this.isIssued = false;
 	}
 	
+	public List<Book> getCheckedOutBooks() {
+        return checkedOutBooks;
+    }
+	
+	public void checkOutBook(Book book) {
+        checkedOutBooks.add(book);
+        setIsIssued(true); // Update the isIssued flag
+    }
+	
+	public void returnBook(Book book) {
+        checkedOutBooks.remove(book);
+        if (checkedOutBooks.isEmpty()) {
+            setIsIssued(false); // Update the isIssued flag
+        }
+    }
+
 	
 }
