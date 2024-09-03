@@ -7,7 +7,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Utility {
-	
 	private String getCurrentDate() {
 		LocalDateTime currentDateTime = LocalDateTime.now();
         // Define the formatter for dd/MM/yyyy HH:mm:ss
@@ -68,5 +67,40 @@ public class Utility {
 		return -1;
 	}
 	
+	public static int confirmRemoveBook() {
+		Scanner input = new Scanner(System.in);
+		
+		String userInput;
+		
+		System.out.println("Are you sure you want to removed this book? y/n");
+		
+		while (true) {
+			System.out.print("Enter (y/n) : ");
+			userInput = input.next();
+			
+			 if (userInput.equalsIgnoreCase("y")) {
+				 return 1;
+			 }else if (userInput.equalsIgnoreCase("n")) {
+				 return -1;
+			 }else {
+				 System.out.println("Invalid input. Please enter 'y' or 'n'.");
+			 }
+		}
+		
+		
+	}
 	
+	public static boolean isValidISBN(String input) {
+		if (input.matches("\\d{4,5}")) {
+            try {
+                // Attempt to parse the number to ensure it is numeric
+                Integer.parseInt(input);
+                return true;
+            } catch (NumberFormatException e) {
+                // Input is not a valid number
+                return false;
+            }
+        }
+        return false;
+	}
 }

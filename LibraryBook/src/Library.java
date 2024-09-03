@@ -36,18 +36,18 @@ public class Library {
 	
 	public void removeBook(/*Book*/) {
 		System.out.println("-----Removes Element------");
-		
-		String searchTerm = "1953";
-		
-//		String searchTerm;
-//		System.out.print("Enter ISBN number of Book to remove:  ");
-//		searchTerm = input.nextLine();
-		
-		//Reads data into record 
+		String searchTerm;
+		System.out.println("Enter ISBN number of Book to remove");
+		while (true) {
+			System.out.print("Enter: ");
+			searchTerm = input.nextLine();
+			if (Utility.isValidISBN(searchTerm)) {
+                break; 
+            } else {
+                System.out.println("Invalid input. Please enter a number with 4 or 5 digits.");
+            }
+		}
 		bookFileManager.readRecord(searchTerm);
-		
-		
-
 	}
 	
 	public void addUser(/*User*/) {

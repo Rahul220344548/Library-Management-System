@@ -47,15 +47,15 @@ public class FileManager {
             int maxID = 0;
             while ((line = reader.readLine()) != null) {
                 String[] fields = line.split(",");
-                int currentID = Integer.parseInt(fields[0]); // Assume userID is the first field
+                int currentID = Integer.parseInt(fields[0]); 
                 if (currentID > maxID) {
                     maxID = currentID;
                 }
             }
-            userIDCounter = maxID + 1; // Start from the next ID
+            userIDCounter = maxID + 1; 
         } catch (IOException e) {
             e.printStackTrace();
-            userIDCounter = 1; // Default to 1 if the file is empty or not found
+            userIDCounter = 1; 
         }
 	}
 	
@@ -95,11 +95,18 @@ public class FileManager {
 		
 		int removeElementAt = Utility.searchISBNnumber(bookRecords, searchTerm);
 		if (removeElementAt == -1) {
-			System.out.println("Error: ISBN number not found.");
+			System.out.println("ERROR! ISBN number not found.");
 		}else {
-			System.out.println(Arrays.toString(bookRecords.get(removeElementAt)));
-			bookRecords.remove(removeElementAt);
-			removeRecord(bookRecords);
+			
+			System.out.println("   ####"+Arrays.toString(bookRecords.get(removeElementAt))+"#####   ");
+			
+			if (Utility.confirmRemoveBook()==1) {
+				bookRecords.remove(removeElementAt);
+				removeRecord(bookRecords);
+				System.out.println("Book removed Successully!");
+			}else {
+				System.out.println("No changes made.");
+			}
 		}
 	}
 
