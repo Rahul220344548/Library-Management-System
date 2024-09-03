@@ -35,17 +35,19 @@ public class Library {
 	}
 	
 	public void removeBook(/*Book*/) {
+		System.out.println("-----Removes Element------");
+		
 		String searchTerm = "1953";
+		
+//		String searchTerm;
+//		System.out.print("Enter ISBN number of Book to remove:  ");
+//		searchTerm = input.nextLine();
+		
 		//Reads data into record 
 		bookFileManager.readRecord(searchTerm);
 		
-		//Search for term 1953
-		// create a function that searchs for term 1953 and returns the record element
-		// for example term 1953 is in element 2
 		
-		
-		
-		
+
 	}
 	
 	public void addUser(/*User*/) {

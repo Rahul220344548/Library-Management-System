@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.io.*;
 public class FileManager {
@@ -58,9 +59,6 @@ public class FileManager {
         }
 	}
 	
-	public void getISBNnumber() {
-		
-	}
 	
 	public void writeNewBookToFile (ArrayList<Book> bookData) {
 		
@@ -89,21 +87,33 @@ public class FileManager {
 			while ((line = reader.readLine()) != null ) {
 				String[] bookRecord = line.split(",");
 				bookRecords.add(bookRecord);
-				System.out.println("Unique ID : " + bookRecord[1] );
 			}
 			
 		}catch (IOException e){
 			e.printStackTrace();
 		}
-			
-		System.out.println(Utility.searchISBNnumber(bookRecords, searchTerm));
-		bookRecords.remove(1);
-//		Utility.displayBookRecords(bookRecords);
 		
-		
+		int removeElementAt = Utility.searchISBNnumber(bookRecords, searchTerm);
+		if (removeElementAt == -1) {
+			System.out.println("Error: ISBN number not found.");
+		}else {
+			System.out.println(Arrays.toString(bookRecords.get(removeElementAt)));
+			bookRecords.remove(removeElementAt);
+			removeRecord(bookRecords);
+		}
+	}
+
+	public void removeRecord(List<String[]> bookRecords ) {
+		try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            for (String[] record : bookRecords) {
+                writer.write(String.join(",", record));
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 		
 	}
-	
 	public int getNextUserID() {
         return userIDCounter++;
     }
