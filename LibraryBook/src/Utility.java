@@ -91,7 +91,7 @@ public class Utility {
 	}
 	
 	public static boolean isValidISBN(String input) {
-		if (input.matches("\\d{4,5}")) {
+		if (input.matches("\\d{4}")) {
             try {
                 // Attempt to parse the number to ensure it is numeric
                 Integer.parseInt(input);
