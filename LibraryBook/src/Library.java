@@ -13,7 +13,8 @@ public class Library {
 	ArrayList<Book> bookData = new ArrayList<>();
 	FileManager userFileManager = new FileManager("C:\\Users\\rahul\\git\\repository\\LibraryBook\\src\\Users.csv");
 	FileManager bookFileManager = new FileManager("C:\\Users\\rahul\\git\\repository\\LibraryBook\\src\\Books.csv");
-
+	issueBookManager bookIssueManager = new issueBookManager("C:\\Users\\rahul\\git\\repository\\LibraryBook\\src\\Books.csv");
+	issueBookManager userIssueManager = new issueBookManager("C:\\Users\\rahul\\git\\repository\\LibraryBook\\src\\Users.csv");
 	
 	public void addNewBook() {
 		Utility generate = new Utility();
@@ -76,9 +77,11 @@ public class Library {
         userFileManager.writeUsersToFile(userData);
 	
 	}
-	private void issueBook(/*bookID, userID*/) {
-		
-		
+	
+	
+	public void issueBook(int bookID, int userID) {
+		bookIssueManager.readBooksToArray();
+		userIssueManager.readUsersToArray();
 		
 		
 	}

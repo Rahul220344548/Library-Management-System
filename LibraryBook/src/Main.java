@@ -87,6 +87,7 @@ public class Main {
     	 		break;
     	 	case 4:
     	 		System.out.println("Issue a book to a user");
+    	 		myLib.issueBook(7,1);
     	 		break;
     	 	case 5:
     	 		System.out.println("Return a book");

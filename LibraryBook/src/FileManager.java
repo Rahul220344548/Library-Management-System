@@ -32,7 +32,7 @@ public class FileManager {
             while ((line = reader.readLine()) != null) {
                 String[] row = line.split(",");
                 for (String index : row) {
-                    System.out.printf("%30s", index);
+                    System.out.printf("%20s", index);
                 }
                 System.out.println();
             }
