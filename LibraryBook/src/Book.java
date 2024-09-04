@@ -42,10 +42,19 @@ public class Book {
 	public boolean getIsIssued() {
 		return isIssued;
 	}
-	public void setIssued() {
-        this.isIssued = true;
+	public void setIssued(boolean isIssued) {
+        this.isIssued = isIssued;
     }
 	
+	
+	public String toString() {
+        return bookID + "," + uniqueID + "," + title + "," + author + "," + isIssued;
+    }
+	
+	public void IssueBook() {
+		
+	
+	}
 	
 	
 	

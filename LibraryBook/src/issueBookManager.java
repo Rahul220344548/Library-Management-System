@@ -1,7 +1,10 @@
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class issueBookManager {
@@ -47,6 +50,7 @@ public class issueBookManager {
 		return userRecords;
 		
 	}
+
 	
 	public static int searchBookID(List<String[]> bookRecords,String searchTerm) {
 		
@@ -59,5 +63,61 @@ public class issueBookManager {
 		}
 		return -1;
 	}	
+	
+	public void setBookStatus(int bookElement) {
+		// This should update the book element 2 to True
+		// update user issued to True
+		// add the book to users checkout books
+		// stored it in file 
 		
+		// Read File into records
+		
+		List<String[]> Books = readBooksToArray();
+
+		
+		System.out.println("   ####"+Arrays.toString(Books.get(bookElement))+"#####   ");
+		
+		String[] bookDetails = Books.get(bookElement);
+		String getBookStatus = bookDetails[4];
+		
+		System.out.println("Current Status: "+ getBookStatus);
+		
+		bookDetails[4] = "TRUE";
+		
+		Books.set(bookElement, bookDetails);
+		
+		System.out.println("Updated Status: " + Arrays.toString(Books.get(bookElement)));
+		
+		// write this data to file 
+		writeUpdatedStatusToFile(Books);
+		
+		
+	}
+	
+	public void writeUpdatedStatusToFile(List<String[]> books) {
+		try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            for (String[] book : books) {
+                // Write each book's details as a comma-separated string
+                writer.write(String.join(",", book));
+                writer.newLine();  // Move to the next line for each book
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+		
+	}
+	
+	public void setUserStatus(int userElement) {
+		
+		List<String[]> Users = readUsersToArray();
+		
+		System.out.println("   ####"+Arrays.toString(Users.get(userElement))+"#####   ");
+		
+		String updateUserStatus = Users.get(userElement)[3];
+		
+		System.out.println(updateUserStatus);
+		
+		
+	}
+	
 }

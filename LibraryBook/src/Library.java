@@ -81,14 +81,9 @@ public class Library {
 	
 	
 	public void issueBook(int bookID, int userID) {
-		
-//		Utility.displayBookRecords(bookIssueManager.readBooksToArray());
-		
 		List<String[]> getBookElement = bookIssueManager.readBooksToArray();		
-		System.out.println(bookIssueManager.searchBookID(getBookElement, "4"));
-		
-		List<String[]> getUserElement = userIssueManager.readUsersToArray();
-		System.out.println(userIssueManager.searchBookID(getUserElement, "3"));
+		int bookElement = bookIssueManager.searchBookID(getBookElement, "6"); // 2
+		bookIssueManager.setBookStatus(bookElement);
 		
 		
 		
@@ -99,6 +94,17 @@ public class Library {
 	
 	private void returnBook(/*bookID, userID*/) {
 		
+//		List<String[]> getBookElement = bookIssueManager.readBooksToArray();		
+//		System.out.println(bookIssueManager.searchBookID(getBookElement, "4")); //2
+//		int bookElement = bookIssueManager.searchBookID(getBookElement, "4");
+		
+		
+//		List<String[]> getUserElement = userIssueManager.readUsersToArray();
+//		System.out.println(userIssueManager.searchBookID(getUserElement, "3")); //2
+//		int userElement = userIssueManager.searchBookID(getUserElement, "3");
+		
+//		bookIssueManager.setBookStatus(bookElement);
+//		userIssueManager.setUserStatus(userElement);
 		
 	}
 	
