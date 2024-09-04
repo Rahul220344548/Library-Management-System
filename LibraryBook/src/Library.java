@@ -81,9 +81,11 @@ public class Library {
 	
 	
 	public void issueBook(int bookID, int userID) {
+		
 		List<String[]> getBookElement = bookIssueManager.readBooksToArray();		
-		int bookElement = bookIssueManager.searchBookID(getBookElement, "6"); // 2
+		int bookElement = bookIssueManager.searchBookID(getBookElement, "3"); // 2
 		bookIssueManager.setBookStatus(bookElement);
+		
 		
 		
 		
