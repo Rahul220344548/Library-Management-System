@@ -82,14 +82,14 @@ public class Library {
 	
 	public void issueBook(int bookID, int userID) {
 		
-		List<String[]> getBookElement = bookIssueManager.readBooksToArray();		
-		int bookElement = bookIssueManager.searchBookID(getBookElement, "3"); // 2
-		bookIssueManager.setBookStatus(bookElement);
+//		List<String[]> getBookElement = bookIssueManager.readBooksToArray();		
+//		int bookElement = bookIssueManager.searchBookID(getBookElement, "1"); // 2
+//		bookIssueManager.setBookStatus(bookElement);
 		
 		
-		
-		
-		
+		List<String[]> getUserElement = userIssueManager.readUsersToArray();
+		int userElement = userIssueManager.searchBookID(getUserElement, "3");
+		userIssueManager.setUserStatus(userElement);
 		
 		
 	}

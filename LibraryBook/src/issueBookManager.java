@@ -84,15 +84,16 @@ public class issueBookManager {
 		if (!isBookAvailable) {
 			System.out.println("Current Status: "+ getBookStatus);
 			
-			bookDetails[4] = String.valueOf(false);
+			bookDetails[4] = String.valueOf(true);
 			Books.set(bookElement, bookDetails);
 			
 			System.out.println("Updated Status: " + Arrays.toString(Books.get(bookElement)));
 			writeUpdatedStatusToFile(Books);
 			
 			
+			
 		}else {
-			System.out.println("Current Status of book is already TRUE ");
+			System.out.println("Current Status of book is already "+getBookStatus);
 
 		}
 		// need to push this book into users file record , and update users status
@@ -118,10 +119,28 @@ public class issueBookManager {
 		
 		System.out.println("   ####"+Arrays.toString(Users.get(userElement))+"#####   ");
 		
-		String updateUserStatus = Users.get(userElement)[3];
+	
+		String[] userDetails = Users.get(userElement);
+		String getUserStatus = userDetails[3];
+
+		boolean isUserStatusTrue = Boolean.parseBoolean(getUserStatus);
 		
-		System.out.println(updateUserStatus);
+		if (!isUserStatusTrue) {
+			
+			System.out.println("Current Status: "+ isUserStatusTrue);
+			
+			userDetails[3] = String.valueOf(true);
+			Users.set(userElement, userDetails);
+			
+			System.out.println("Updated Status: " + Arrays.toString(Users.get(userElement)));
+			
+			writeUpdatedStatusToFile(Users);
 		
+			
+		}else {
+			System.out.println("Current Status of User is already "+ getUserStatus);
+		}
+				
 		
 	}
 	
