@@ -150,29 +150,42 @@ public class issueBookManager {
 		// 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
 		
 		
+
 		List<String[]> users = readUsersToArray();
+		
 		String existingBooksString = users.get(userElement)[4];
 		
-		String[] existingBooksArray = existingBooksString.split(",");	
-	    ArrayList<String> existingBooks = new ArrayList<>(Arrays.asList(existingBooksArray));
-	    
-	    
-	    if (existingBooks.size() == 1 && existingBooks.get(0).trim().isEmpty()) {
-	        existingBooks.clear();
-	    }
-	    existingBooks.add(nameToAddToArray);
-	    
-	    String booksString = String.join(",", existingBooks);
-	    users.get(userElement)[4] = "Rahul";
+		String[] existingBooksArray = existingBooksString.split(":");
+		ArrayList<String> existingBooks = new ArrayList<>(Arrays.asList(existingBooksArray));
+	    	
+		if (existingBooksString.length() == 2) { 
+			
+			existingBooks.clear();
+			
+			existingBooks.add(nameToAddToArray);
+			String bookString = String.join(":",existingBooks);
+			
+			users.get(userElement)[4] = bookString;
+			
+			writeUpdatedStatusToFile(users);
+			
+		}else {
+			
+			existingBooks.add(nameToAddToArray);
+			String bookString = String.join(":",existingBooks);
+			
+			users.get(userElement)[4] = bookString;
+			
+			writeUpdatedStatusToFile(users);
+			
+		}
+			
+//		for (String i : existingBooksArray) {
+//			System.out.print(i + ", ");
+//		}
+//		System.out.println();
 		
-		
-	    System.out.println(users.get(userElement)[4]);
-		
-//	    writeUpdatedStatusToFile(users);
-    
-        
 		
 	}
-	
 	
 }
