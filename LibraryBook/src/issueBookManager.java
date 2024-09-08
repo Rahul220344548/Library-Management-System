@@ -64,7 +64,7 @@ public class issueBookManager {
 		return -1;
 	}	
 	
-	public void setBookStatus(int bookElement) {
+	public int setBookStatus(int bookElement) {
 		// This should update the book element 2 to True
 		// update user issued to True
 		// add the book to users checkout books
@@ -73,7 +73,7 @@ public class issueBookManager {
 		// Read File into records
 		
 		List<String[]> Books = readBooksToArray();
-
+		
 		
 		System.out.println("   ####"+Arrays.toString(Books.get(bookElement))+"#####   ");
 		
@@ -89,14 +89,15 @@ public class issueBookManager {
 			
 			System.out.println("Updated Status: " + Arrays.toString(Books.get(bookElement)));
 			writeUpdatedStatusToFile(Books);
-			
-			
+			return 1;
 			
 		}else {
-			System.out.println("Current Status of book is already "+getBookStatus);
+			return -1;
+//			System.out.println("Current Status of book is already "+getBookStatus);
 
 		}
 		// need to push this book into users file record , and update users status
+		
 		
 	}
 	
@@ -118,8 +119,7 @@ public class issueBookManager {
 		List<String[]> Users = readUsersToArray();
 		
 		System.out.println("   ####"+Arrays.toString(Users.get(userElement))+"#####   ");
-		
-	
+
 		String[] userDetails = Users.get(userElement);
 		String getUserStatus = userDetails[3];
 
@@ -138,10 +138,41 @@ public class issueBookManager {
 		
 			
 		}else {
+			
 			System.out.println("Current Status of User is already "+ getUserStatus);
 		}
 				
 		
 	}
+
+	public void updateUserCheckoutRecords(int userElement,String nameToAddToArray) {
+		
+		// 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
+		
+		
+		List<String[]> users = readUsersToArray();
+		String existingBooksString = users.get(userElement)[4];
+		
+		String[] existingBooksArray = existingBooksString.split(",");	
+	    ArrayList<String> existingBooks = new ArrayList<>(Arrays.asList(existingBooksArray));
+	    
+	    
+	    if (existingBooks.size() == 1 && existingBooks.get(0).trim().isEmpty()) {
+	        existingBooks.clear();
+	    }
+	    existingBooks.add(nameToAddToArray);
+	    
+	    String booksString = String.join(",", existingBooks);
+	    users.get(userElement)[4] = "Rahul";
+		
+		
+	    System.out.println(users.get(userElement)[4]);
+		
+//	    writeUpdatedStatusToFile(users);
+    
+        
+		
+	}
+	
 	
 }

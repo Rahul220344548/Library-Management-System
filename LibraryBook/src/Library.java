@@ -82,14 +82,29 @@ public class Library {
 	
 	public void issueBook(int bookID, int userID) {
 		
-//		List<String[]> getBookElement = bookIssueManager.readBooksToArray();		
-//		int bookElement = bookIssueManager.searchBookID(getBookElement, "1"); // 2
-//		bookIssueManager.setBookStatus(bookElement);
+		List<String[]> getBookElement = bookIssueManager.readBooksToArray();		
+		int bookElement = bookIssueManager.searchBookID(getBookElement, "3"); // 2
+		
+		if (bookIssueManager.setBookStatus(bookElement)==-1) {
+			
+			
+//			System.out.println(getBookElement.get(bookElement)[2]);
+			
+			
+			int userElement = 1;
+			
+			String nameToAddToArray = getBookElement.get(bookElement)[2];
+					
+			userIssueManager.updateUserCheckoutRecords(userElement,nameToAddToArray);
+			
+		}
 		
 		
-		List<String[]> getUserElement = userIssueManager.readUsersToArray();
-		int userElement = userIssueManager.searchBookID(getUserElement, "3");
-		userIssueManager.setUserStatus(userElement);
+		
+//		List<String[]> getUserElement = userIssueManager.readUsersToArray();
+//		int userElement = userIssueManager.searchBookID(getUserElement, "2");
+//		userIssueManager.setUserStatus(userElement);
+		
 		
 		
 	}

@@ -1,5 +1,6 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
@@ -107,5 +108,12 @@ public class Utility {
             }
         }
         return false;
+	}
+
+	public static  ArrayList<String> storeBookNameToArray(ArrayList<String> books, String name) {
+	
+		books.add(name);
+		
+		return books;
 	}
 }
