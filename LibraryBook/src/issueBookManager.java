@@ -147,9 +147,6 @@ public class issueBookManager {
 
 	public void updateUserCheckoutRecords(int userElement,String nameToAddToArray) {
 		
-		// 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
-		
-		
 
 		List<String[]> users = readUsersToArray();
 		
@@ -157,35 +154,27 @@ public class issueBookManager {
 		
 		String[] existingBooksArray = existingBooksString.split(":");
 		ArrayList<String> existingBooks = new ArrayList<>(Arrays.asList(existingBooksArray));
-	    	
-		if (existingBooksString.length() == 2) { 
-			
-			existingBooks.clear();
-			
-			existingBooks.add(nameToAddToArray);
-			String bookString = String.join(":",existingBooks);
-			
-			users.get(userElement)[4] = bookString;
-			
-			writeUpdatedStatusToFile(users);
-			
-		}else {
-			
-			existingBooks.add(nameToAddToArray);
-			String bookString = String.join(":",existingBooks);
-			
-			users.get(userElement)[4] = bookString;
-			
-			writeUpdatedStatusToFile(users);
-			
+	    
+		if (existingBooks.size()>=5) {
+			System.out.println("User has reached or exceeded the maximum book limit.");
+			return;
 		}
-			
-//		for (String i : existingBooksArray) {
-//			System.out.print(i + ", ");
-//		}
-//		System.out.println();
 		
+		if (existingBooksString.length() == 2) { 
+			existingBooks.clear();	
+		}
+
+		existingBooks.add(nameToAddToArray);
+		
+		String bookString = String.join(":",existingBooks);
+		
+		users.get(userElement)[4] = bookString;
+		
+		writeUpdatedStatusToFile(users);
+		
+		System.out.println("Book added Successfully!");	
 		
 	}
+	
 	
 }
