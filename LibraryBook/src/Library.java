@@ -88,6 +88,10 @@ public class Library {
 		List<String[]> getUserElement = userIssueManager.readUsersToArray();
 		int userElement = userIssueManager.searchBookID(getUserElement, userID);
 		
+		if (bookElement == -1 || userElement == -1) {
+			System.out.println("Error: The Book ID or User ID you entered could not be found.");
+			return;
+		}
 		
 		int isBookAvaliable = bookIssueManager.setBookStatus(bookElement);
 
@@ -102,13 +106,35 @@ public class Library {
 			String nameToAddToArray = getBookElement.get(bookElement)[2];		
 			userIssueManager.updateUserCheckoutRecords(userElement,nameToAddToArray);
 		}
-		
+		System.out.println("The book is currently issued.");
 		
 	}
 	
-	private void returnBook(/*bookID, userID*/) {
+	public void returnBook(String bookID, int userID) {
 		
-
+		System.out.println(bookID);
+		System.out.println(userID);
+		
+		// search for book - check is book status is false then do nothing 
+		// update book status to false 
+		// complete a check if all books are removed then set user status to false
+		// search userID records 
+		// remove book for userRecords 
+		// complete a check if all books are removed then set user status to false 
+		
+		List<String[]> getBookElement = bookIssueManager.readBooksToArray();		
+		int bookElement = bookIssueManager.searchBookID(getBookElement, bookID);
+		
+		int isBookAvaliable = bookIssueManager.setBookStatus(bookElement);
+		
+		if (isBookAvaliable==-1) {
+			// update book status to false 
+			bookIssueManager.updateBookStatus(bookElement);
+			
+		}
+		
+		
+		
 		
 	}
 	
