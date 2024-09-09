@@ -86,8 +86,12 @@ public class Main {
     	 		myLib.removeBook();
     	 		break;
     	 	case 4:
-    	 		System.out.println("Issue a book to a user");
-    	 		myLib.issueBook(7,1);
+    	 		
+    	 		Utility checkID = new Utility();
+    	 		String bookID = checkID.checkBookID(input);
+    	 		String userID = checkID.checkUserID(input);
+    	 		
+    	 		myLib.issueBook(bookID,userID);
     	 		break;
     	 	case 5:
 //    	 		myLib.clearUserFile();

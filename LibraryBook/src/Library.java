@@ -80,48 +80,35 @@ public class Library {
 	}
 	
 	
-	public void issueBook(int bookID, int userID) {
-		
+	public void issueBook(String bookID, String userID) {
+				
 		List<String[]> getBookElement = bookIssueManager.readBooksToArray();		
-		int bookElement = bookIssueManager.searchBookID(getBookElement, "3"); // 2
+		int bookElement = bookIssueManager.searchBookID(getBookElement, bookID);
 		
-		if (bookIssueManager.setBookStatus(bookElement)==-1) {
-			
-			
-//			System.out.println(getBookElement.get(bookElement)[2]);
-			
-			
-			int userElement = 1;
-			
-			String nameToAddToArray = getBookElement.get(bookElement)[2];
-					
+		List<String[]> getUserElement = userIssueManager.readUsersToArray();
+		int userElement = userIssueManager.searchBookID(getUserElement, userID);
+		
+		
+		int isBookAvaliable = bookIssueManager.setBookStatus(bookElement);
+
+		if (isBookAvaliable==1) {
+			int isUserStatusTrue = userIssueManager.setUserStatus(userElement);
+			// If the user has borrowed books before, update their records with the new book
+			if (isUserStatusTrue==1) {
+				String nameToAddToArray = getBookElement.get(bookElement)[2];
+				userIssueManager.updateUserCheckoutRecords(userElement,nameToAddToArray);
+			}
+			// Always add the book to the user's checkout records regardless of the status
+			String nameToAddToArray = getBookElement.get(bookElement)[2];		
 			userIssueManager.updateUserCheckoutRecords(userElement,nameToAddToArray);
-			
 		}
-		
-		
-		
-//		List<String[]> getUserElement = userIssueManager.readUsersToArray();
-//		int userElement = userIssueManager.searchBookID(getUserElement, "2");
-//		userIssueManager.setUserStatus(userElement);
-		
 		
 		
 	}
 	
 	private void returnBook(/*bookID, userID*/) {
 		
-//		List<String[]> getBookElement = bookIssueManager.readBooksToArray();		
-//		System.out.println(bookIssueManager.searchBookID(getBookElement, "4")); //2
-//		int bookElement = bookIssueManager.searchBookID(getBookElement, "4");
-		
-		
-//		List<String[]> getUserElement = userIssueManager.readUsersToArray();
-//		System.out.println(userIssueManager.searchBookID(getUserElement, "3")); //2
-//		int userElement = userIssueManager.searchBookID(getUserElement, "3");
-		
-//		bookIssueManager.setBookStatus(bookElement);
-//		userIssueManager.setUserStatus(userElement);
+
 		
 	}
 	

@@ -116,4 +116,46 @@ public class Utility {
 		
 		return books;
 	}
+	
+	public static String checkBookID(Scanner input) {
+		
+		String bookIDInput;
+        
+        while (true) {
+            System.out.print("Enter book ID to issue (must be an integer): ");
+            bookIDInput = input.next();
+            
+            if (isInteger(bookIDInput)) {
+                break;  // Exit the loop if a valid integer is provided
+            } else {
+                System.out.println("Invalid input. Please enter a valid integer for the book ID.");
+            }
+        }
+        return bookIDInput;
+		
+	}
+	
+	public static String checkUserID(Scanner input) {
+		String userIDInput;
+		
+		while (true) {
+            System.out.print("Enter user ID to issue book (must be an integer): ");
+            userIDInput = input.next();
+            
+            if (isInteger(userIDInput)) {
+                break;  // Exit the loop if a valid integer is provided
+            } else {
+                System.out.println("Invalid input. Please enter a valid integer for the user ID.");
+            }
+        }
+		return userIDInput;
+	}
+	private static boolean isInteger(String input) {
+		try {
+			Integer.parseInt(input);
+			return true;
+		}catch (NumberFormatException e) {
+			return false;
+		}
+	}
 }

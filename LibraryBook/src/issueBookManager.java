@@ -31,7 +31,7 @@ public class issueBookManager {
 			e.printStackTrace();
 		}
 		return bookRecords;
-//		Utility.displayBookRecords(bookRecords);
+
 	}
 	
 	public List<String[]> readUsersToArray() {
@@ -65,13 +65,7 @@ public class issueBookManager {
 	}	
 	
 	public int setBookStatus(int bookElement) {
-		// This should update the book element 2 to True
-		// update user issued to True
-		// add the book to users checkout books
-		// stored it in file 
-		
-		// Read File into records
-		
+				
 		List<String[]> Books = readBooksToArray();
 		
 		
@@ -92,13 +86,9 @@ public class issueBookManager {
 			return 1;
 			
 		}else {
+			System.out.println("The book is currently issued. Status: " + getBookStatus);
 			return -1;
-//			System.out.println("Current Status of book is already "+getBookStatus);
-
-		}
-		// need to push this book into users file record , and update users status
-		
-		
+		}	
 	}
 	
 	public void writeUpdatedStatusToFile(List<String[]> books) {
@@ -114,7 +104,7 @@ public class issueBookManager {
 		
 	}
 	
-	public void setUserStatus(int userElement) {
+	public int setUserStatus(int userElement) {
 		
 		List<String[]> Users = readUsersToArray();
 		
@@ -135,11 +125,12 @@ public class issueBookManager {
 			System.out.println("Updated Status: " + Arrays.toString(Users.get(userElement)));
 			
 			writeUpdatedStatusToFile(Users);
-		
+			return 1;
 			
 		}else {
 			
 			System.out.println("Current Status of User is already "+ getUserStatus);
+			return -1;
 		}
 				
 		
