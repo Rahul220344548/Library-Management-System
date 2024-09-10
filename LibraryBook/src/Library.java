@@ -82,6 +82,12 @@ public class Library {
 	
 	public void issueBook(String bookID, String userID) {
 				
+		/**
+		 * Issues a book to a user.
+		 * 
+		 * Checks if the book and user exist. If the book is available, it updates the book's status to issued
+		 * and adds the book to the user's checkout records. If the book is already issued, it displays an error message.
+		 */
 		List<String[]> getBookElement = bookIssueManager.readBooksToArray();		
 		int bookElement = bookIssueManager.searchBookID(getBookElement, bookID);
 		
@@ -92,11 +98,11 @@ public class Library {
 			System.out.println("Error: The Book ID or User ID you entered could not be found.");
 			return;
 		}
-		
+
 		boolean isBookAvaliable = bookIssueManager.getBookStatus(bookElement);
 		
-		
-		if (!isBookAvaliable) { // Book is Avaliable = Book Status = False 
+
+		if (!isBookAvaliable) { 
 			bookIssueManager.setBookStatus(bookElement);
 			
 			boolean isUserStatusTrue = userIssueManager.getUserStatus(userElement);
