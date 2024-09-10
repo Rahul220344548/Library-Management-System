@@ -51,13 +51,22 @@ public class issueBookManager {
 		
 	}
 
-	public String getUserStatus(int userElement) {
+	public boolean getUserStatus(int userElement) {
 		List<String[]> Users = readBooksToArray();
 		String[] userDetails = Users.get(userElement);
 		String getUserStatus = userDetails[3];
-		return getUserStatus;
+		boolean convertStatus = Boolean.parseBoolean(getUserStatus);
+		return convertStatus;
 	}
 	
+	public boolean getBookStatus(int bookElement) {
+		List<String[]> Books = readBooksToArray();
+		String[] bookDetails = Books.get(bookElement);
+		String getBookStatus = bookDetails[4];
+		boolean convertStatus = Boolean.parseBoolean(getBookStatus);
+		return convertStatus;
+		
+	}
 	public static int searchBookID(List<String[]> bookRecords,String searchTerm) {
 		
 		int element;
@@ -189,8 +198,30 @@ public class issueBookManager {
 		bookDetails[4] = String.valueOf(false);
 		Books.set(bookElement, bookDetails);
 		System.out.println("Updated Status: " + Arrays.toString(Books.get(bookElement)));
+		writeUpdatedStatusToFile(Books);
 		return 1;
 		
+	}
+	
+	public int updateUserStatusToFalse(int userElement) {
+		
+		List<String[]> users= readBooksToArray();
+		
+		String[] userDetails = users.get(userElement);
+		String getUserStatus = userDetails[3];
+		boolean setUserStatusToTrue = Boolean.parseBoolean(getUserStatus);
+		
+		userDetails[3]= String.valueOf(false);
+		
+		users.set(userElement,userDetails);
+		
+//		users.get(userElement)[4] = "[]"; 
+		
+		
+		
+		System.out.println("Updated Status: " + Arrays.toString(users.get(userElement)));
+		writeUpdatedStatusToFile(users);
+		return 0;
 	}
 	
 	public void removeBookFromUserRecords (int userElement, String bookName) {
@@ -202,18 +233,29 @@ public class issueBookManager {
 		String[] existingBooksArray = existingBooksString.split(":");
 		ArrayList<String> existingBooks = new ArrayList<>(Arrays.asList(existingBooksArray));
 		
-		
-		// Finds index of book to search 
-	
-		System.out.println(existingBooks.indexOf(bookName));
 		int removeBookIndex = existingBooks.indexOf(bookName);
 		
 		existingBooks.remove(removeBookIndex);
 		
-		for (String i : existingBooks) {
-			System.out.print(i+": ");
-		}
-		System.out.println();
+		String bookString = String.join(":",existingBooks);
+		
+		
+		if (existingBooks.size() == 0) {
+			
+			String[] userDetails = users.get(userElement);
+			String getUserStatus = userDetails[3];
+			userDetails[3]= String.valueOf(false);
+			users.set(userElement,userDetails);
+	        users.get(userElement)[4] = "[]"; 
+	  
+	    } else {
+	        users.get(userElement)[4] = bookString;
+	    }		
+		
+        writeUpdatedStatusToFile(users);
+
+		
 		
 	}
+	
 }

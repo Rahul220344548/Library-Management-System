@@ -58,7 +58,8 @@ public class Utility {
 	
 	public static void displayUserRecords (List<String[]> userRecords) {
 		for (String[] record : userRecords) {
-            System.out.println("ID : " + record[0]+" Name: " + record[1] + " Address: " + record[2]);
+            System.out.println("ID : " + record[0]+" Name: " + record[1] + " Address: " + record[2] 
+            						+ " isIssued: "+ record[3] + " booksCheckout: " + record[4]);
         }
 	}
 	public static int searchISBNnumber(List<String[]> bookRecords,String searchTerm) {

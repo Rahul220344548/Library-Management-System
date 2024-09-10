@@ -92,9 +92,9 @@ public class Main {
     	 		myLib.issueBook(bookID,userID);
     	 		break;
     	 	case 5:
-    	 		String book = "1";
-    	 		String user = "2";
-    	 		myLib.returnBook(book,user);
+    	 		String bookID5 = checkID.checkBookID(input);
+    	 		String userID5 = checkID.checkUserID(input);
+    	 		myLib.returnBook(bookID5,userID5);
     	 		break;
     	 	case 6:
     	 		myLib.displayBooks();

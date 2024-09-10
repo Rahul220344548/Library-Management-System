@@ -101,6 +101,7 @@ public class Library {
 			if (isUserStatusTrue==1) {
 				String nameToAddToArray = getBookElement.get(bookElement)[2];
 				userIssueManager.updateUserCheckoutRecords(userElement,nameToAddToArray);
+				return;
 			}
 			// Always add the book to the user's checkout records regardless of the status
 			String nameToAddToArray = getBookElement.get(bookElement)[2];		
@@ -112,42 +113,36 @@ public class Library {
 	
 	public void returnBook(String bookID, String userID) {
 		
+		//update Book status to False 
+		// remove book from user records
+		// check if it is last book in record , then update records and set user stautus 
 		
 		
-		// search for book - check is book status is false then do nothing 
-		// update book status to false 
-		// complete a check if all books are removed then set user status to false
-		// search userID records 
-		// remove book for userRecords 
-		// complete a check if all books are removed then set user status to false 
 		
-		// Scenario:
-		// 1 :
-		//    - Book status is True , User status is True , remove book 
-		//			- 
-		// 2:
-		//	 - Book Status is True , User status is False , do nothing
-		//
 		List<String[]> getBookElement = bookIssueManager.readBooksToArray();		
 		int bookElement = bookIssueManager.searchBookID(getBookElement, bookID);
 		
 		List<String[]> getUserElement = userIssueManager.readUsersToArray();
 		int userElement = userIssueManager.searchBookID(getUserElement, userID);
 		
-		int isBookAvaliable = bookIssueManager.setBookStatus(bookElement);
 		
-		if (isBookAvaliable==-1) {
-			// update book status to false
-			int isUserStatusTrue = userIssueManager.getUserStatus(userElement);
+		Boolean isBookStatusTrue = bookIssueManager.getBookStatus(bookElement);
+		
+		if (isBookStatusTrue) { 
 			
+			Boolean hasUserBorrowedBooks = userIssueManager.getUserStatus(userElement);
 			
-			String bookName = getBookElement.get(bookElement)[2];
-			bookIssueManager.updateBookStatus(bookElement);
-			userIssueManager.removeBookFromUserRecords(userElement, bookName);
-			
+			if (hasUserBorrowedBooks) {
+				
+				String bookName = getBookElement.get(bookElement)[2];
+				bookIssueManager.updateBookStatus(bookElement);
+				userIssueManager.removeBookFromUserRecords(userElement, bookName);
+				return;
+			}
+			System.out.println("User has not borrowed Books");
 		}
-		
-		
+		System.out.println("Book is not issued to User!");
+
 		
 		
 	}
