@@ -121,6 +121,13 @@ public class Library {
 		// remove book for userRecords 
 		// complete a check if all books are removed then set user status to false 
 		
+		// Scenario:
+		// 1 :
+		//    - Book status is True , User status is True , remove book 
+		//			- 
+		// 2:
+		//	 - Book Status is True , User status is False , do nothing
+		//
 		List<String[]> getBookElement = bookIssueManager.readBooksToArray();		
 		int bookElement = bookIssueManager.searchBookID(getBookElement, bookID);
 		
@@ -130,7 +137,10 @@ public class Library {
 		int isBookAvaliable = bookIssueManager.setBookStatus(bookElement);
 		
 		if (isBookAvaliable==-1) {
-			// update book status to false 
+			// update book status to false
+			int isUserStatusTrue = userIssueManager.getUserStatus(userElement);
+			
+			
 			String bookName = getBookElement.get(bookElement)[2];
 			bookIssueManager.updateBookStatus(bookElement);
 			userIssueManager.removeBookFromUserRecords(userElement, bookName);

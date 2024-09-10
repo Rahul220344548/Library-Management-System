@@ -51,6 +51,12 @@ public class issueBookManager {
 		
 	}
 
+	public String getUserStatus(int userElement) {
+		List<String[]> Users = readBooksToArray();
+		String[] userDetails = Users.get(userElement);
+		String getUserStatus = userDetails[3];
+		return getUserStatus;
+	}
 	
 	public static int searchBookID(List<String[]> bookRecords,String searchTerm) {
 		
@@ -135,7 +141,7 @@ public class issueBookManager {
 				
 		
 	}
-
+	
 	public void updateUserCheckoutRecords(int userElement,String nameToAddToArray) {
 		
 
@@ -197,7 +203,7 @@ public class issueBookManager {
 		ArrayList<String> existingBooks = new ArrayList<>(Arrays.asList(existingBooksArray));
 		
 		
-		// need to Search for the book
+		// Finds index of book to search 
 	
 		System.out.println(existingBooks.indexOf(bookName));
 		int removeBookIndex = existingBooks.indexOf(bookName);
