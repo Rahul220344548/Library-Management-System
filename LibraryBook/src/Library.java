@@ -93,19 +93,23 @@ public class Library {
 			return;
 		}
 		
-		int isBookAvaliable = bookIssueManager.setBookStatus(bookElement);
-
-		if (isBookAvaliable==1) {
-			int isUserStatusTrue = userIssueManager.setUserStatus(userElement);
-			// If the user has borrowed books before, update their records with the new book
-			if (isUserStatusTrue==1) {
+		boolean isBookAvaliable = bookIssueManager.getBookStatus(bookElement);
+		
+		
+		if (!isBookAvaliable) { // Book is Avaliable = Book Status = False 
+			bookIssueManager.setBookStatus(bookElement);
+			
+			boolean isUserStatusTrue = userIssueManager.getUserStatus(userElement);
+		
+			if (isUserStatusTrue) {
 				String nameToAddToArray = getBookElement.get(bookElement)[2];
 				userIssueManager.updateUserCheckoutRecords(userElement,nameToAddToArray);
 				return;
 			}
-			// Always add the book to the user's checkout records regardless of the status
+			userIssueManager.setUserStatus(userElement);
 			String nameToAddToArray = getBookElement.get(bookElement)[2];		
 			userIssueManager.updateUserCheckoutRecords(userElement,nameToAddToArray);
+			return;
 		}
 		System.out.println("The book is currently issued.");
 		

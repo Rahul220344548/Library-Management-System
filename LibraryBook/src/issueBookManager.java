@@ -83,20 +83,16 @@ public class issueBookManager {
 				
 		List<String[]> Books = readBooksToArray();
 		
-		
-		System.out.println("   ####"+Arrays.toString(Books.get(bookElement))+"#####   ");
-		
+				
 		String[] bookDetails = Books.get(bookElement);
 		String getBookStatus = bookDetails[4];
 		boolean isBookAvailable = Boolean.parseBoolean(getBookStatus);
 		
 		if (!isBookAvailable) {
-			System.out.println("Current Status: "+ getBookStatus);
 			
 			bookDetails[4] = String.valueOf(true);
 			Books.set(bookElement, bookDetails);
 			
-			System.out.println("Updated Status: " + Arrays.toString(Books.get(bookElement)));
 			writeUpdatedStatusToFile(Books);
 			return 1;
 			
@@ -123,7 +119,6 @@ public class issueBookManager {
 		
 		List<String[]> Users = readUsersToArray();
 		
-		System.out.println("   ####"+Arrays.toString(Users.get(userElement))+"#####   ");
 
 		String[] userDetails = Users.get(userElement);
 		String getUserStatus = userDetails[3];
@@ -131,24 +126,15 @@ public class issueBookManager {
 		boolean isUserStatusTrue = Boolean.parseBoolean(getUserStatus);
 		
 		if (!isUserStatusTrue) {
-			
-			System.out.println("Current Status: "+ isUserStatusTrue);
-			
+						
 			userDetails[3] = String.valueOf(true);
 			Users.set(userElement, userDetails);
-			
-			System.out.println("Updated Status: " + Arrays.toString(Users.get(userElement)));
 			
 			writeUpdatedStatusToFile(Users);
 			return 1;
 			
-		}else {
-			
-			System.out.println("Current Status of User is already "+ getUserStatus);
-			return -1;
-		}
-				
-		
+		}		
+		return 0;
 	}
 	
 	public void updateUserCheckoutRecords(int userElement,String nameToAddToArray) {
@@ -186,7 +172,6 @@ public class issueBookManager {
 		
 		List<String[]> Books = readBooksToArray();
 		
-		System.out.println("   ####"+Arrays.toString(Books.get(bookElement))+"#####   ");
 		
 		String[] bookDetails = Books.get(bookElement);
 		String getBookStatus = bookDetails[4];
@@ -197,7 +182,6 @@ public class issueBookManager {
 		}
 		bookDetails[4] = String.valueOf(false);
 		Books.set(bookElement, bookDetails);
-		System.out.println("Updated Status: " + Arrays.toString(Books.get(bookElement)));
 		writeUpdatedStatusToFile(Books);
 		return 1;
 		
@@ -234,8 +218,6 @@ public class issueBookManager {
 		
         writeUpdatedStatusToFile(users);
 
-		
-		
 	}
 	
 }
