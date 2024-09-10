@@ -110,10 +110,9 @@ public class Library {
 		
 	}
 	
-	public void returnBook(String bookID, int userID) {
+	public void returnBook(String bookID, String userID) {
 		
-		System.out.println(bookID);
-		System.out.println(userID);
+		
 		
 		// search for book - check is book status is false then do nothing 
 		// update book status to false 
@@ -125,11 +124,16 @@ public class Library {
 		List<String[]> getBookElement = bookIssueManager.readBooksToArray();		
 		int bookElement = bookIssueManager.searchBookID(getBookElement, bookID);
 		
+		List<String[]> getUserElement = userIssueManager.readUsersToArray();
+		int userElement = userIssueManager.searchBookID(getUserElement, userID);
+		
 		int isBookAvaliable = bookIssueManager.setBookStatus(bookElement);
 		
 		if (isBookAvaliable==-1) {
 			// update book status to false 
+			String bookName = getBookElement.get(bookElement)[2];
 			bookIssueManager.updateBookStatus(bookElement);
+			userIssueManager.removeBookFromUserRecords(userElement, bookName);
 			
 		}
 		

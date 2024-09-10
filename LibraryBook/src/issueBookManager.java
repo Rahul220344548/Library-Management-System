@@ -86,7 +86,7 @@ public class issueBookManager {
 			return 1;
 			
 		}else {
-			System.out.println("The book is currently issued. Status: " + getBookStatus);
+			
 			return -1;
 		}	
 	}
@@ -167,5 +167,47 @@ public class issueBookManager {
 		
 	}
 	
+	public int updateBookStatus(int bookElement) {
+		
+		List<String[]> Books = readBooksToArray();
+		
+		System.out.println("   ####"+Arrays.toString(Books.get(bookElement))+"#####   ");
+		
+		String[] bookDetails = Books.get(bookElement);
+		String getBookStatus = bookDetails[4];
+		boolean isBookSetToTrue = Boolean.parseBoolean(getBookStatus);
+		
+		if (!isBookSetToTrue) {
+			return -1;
+		}
+		bookDetails[4] = String.valueOf(false);
+		Books.set(bookElement, bookDetails);
+		System.out.println("Updated Status: " + Arrays.toString(Books.get(bookElement)));
+		return 1;
+		
+	}
 	
+	public void removeBookFromUserRecords (int userElement, String bookName) {
+		
+		List<String[]> users = readUsersToArray();
+		
+		String existingBooksString = users.get(userElement)[4];
+		
+		String[] existingBooksArray = existingBooksString.split(":");
+		ArrayList<String> existingBooks = new ArrayList<>(Arrays.asList(existingBooksArray));
+		
+		
+		// need to Search for the book
+	
+		System.out.println(existingBooks.indexOf(bookName));
+		int removeBookIndex = existingBooks.indexOf(bookName);
+		
+		existingBooks.remove(removeBookIndex);
+		
+		for (String i : existingBooks) {
+			System.out.print(i+": ");
+		}
+		System.out.println();
+		
+	}
 }

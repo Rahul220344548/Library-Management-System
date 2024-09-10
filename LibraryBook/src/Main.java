@@ -73,6 +73,7 @@ public class Main {
 
     public void handleUserOption(int userOption) {
     	Library myLib = new Library();
+    	Utility checkID = new Utility();
     	 switch (userOption) {
     	 	case 1:
     	 		myLib.addNewBook();
@@ -86,16 +87,14 @@ public class Main {
     	 		myLib.removeBook();
     	 		break;
     	 	case 4:
-    	 		
-    	 		Utility checkID = new Utility();
     	 		String bookID = checkID.checkBookID(input);
     	 		String userID = checkID.checkUserID(input);
-    	 		
     	 		myLib.issueBook(bookID,userID);
     	 		break;
     	 	case 5:
-//    	 		myLib.clearUserFile();
-    	 		System.out.println("Return a book");
+    	 		String book = "1";
+    	 		String user = "2";
+    	 		myLib.returnBook(book,user);
     	 		break;
     	 	case 6:
     	 		myLib.displayBooks();
