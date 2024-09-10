@@ -113,11 +113,6 @@ public class Library {
 	
 	public void returnBook(String bookID, String userID) {
 		
-		//update Book status to False 
-		// remove book from user records
-		// check if it is last book in record , then update records and set user stautus 
-		
-		
 		
 		List<String[]> getBookElement = bookIssueManager.readBooksToArray();		
 		int bookElement = bookIssueManager.searchBookID(getBookElement, bookID);
@@ -125,6 +120,10 @@ public class Library {
 		List<String[]> getUserElement = userIssueManager.readUsersToArray();
 		int userElement = userIssueManager.searchBookID(getUserElement, userID);
 		
+		if (bookElement == -1 || userElement == -1) {
+			System.out.println("Error: The Book ID or User ID you entered could not be found.");
+			return;
+		}
 		
 		Boolean isBookStatusTrue = bookIssueManager.getBookStatus(bookElement);
 		
@@ -137,6 +136,9 @@ public class Library {
 				String bookName = getBookElement.get(bookElement)[2];
 				bookIssueManager.updateBookStatus(bookElement);
 				userIssueManager.removeBookFromUserRecords(userElement, bookName);
+				
+				System.out.println("Book removed Successfully!");
+				
 				return;
 			}
 			System.out.println("User has not borrowed Books");

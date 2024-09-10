@@ -203,27 +203,7 @@ public class issueBookManager {
 		
 	}
 	
-	public int updateUserStatusToFalse(int userElement) {
-		
-		List<String[]> users= readBooksToArray();
-		
-		String[] userDetails = users.get(userElement);
-		String getUserStatus = userDetails[3];
-		boolean setUserStatusToTrue = Boolean.parseBoolean(getUserStatus);
-		
-		userDetails[3]= String.valueOf(false);
-		
-		users.set(userElement,userDetails);
-		
-//		users.get(userElement)[4] = "[]"; 
-		
-		
-		
-		System.out.println("Updated Status: " + Arrays.toString(users.get(userElement)));
-		writeUpdatedStatusToFile(users);
-		return 0;
-	}
-	
+
 	public void removeBookFromUserRecords (int userElement, String bookName) {
 		
 		List<String[]> users = readUsersToArray();
