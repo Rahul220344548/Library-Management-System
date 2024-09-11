@@ -87,17 +87,12 @@ public class Library {
 		 * 
 		 * Checks if the book and user exist. If the book is available, it updates the book's status to issued
 		 * and adds the book to the user's checkout records. If the book is already issued, it displays an error message.
-		 */
-		List<String[]> getBookElement = bookIssueManager.readBooksToArray();		
-		int bookElement = bookIssueManager.searchBookID(getBookElement, bookID);
+		*/
 		
-		List<String[]> getUserElement = userIssueManager.readUsersToArray();
-		int userElement = userIssueManager.searchBookID(getUserElement, userID);
-		
-		if (bookElement == -1 || userElement == -1) {
-			System.out.println("Error: The Book ID or User ID you entered could not be found.");
-			return;
-		}
+		int[] elements = findBookAndUser(bookID, userID);
+		if (elements == null) return;
+		int bookElement = elements[0];
+		int userElement = elements[1];
 
 		boolean isBookAvaliable = bookIssueManager.getBookStatus(bookElement);
 		
@@ -106,14 +101,13 @@ public class Library {
 			bookIssueManager.setBookStatus(bookElement);
 			
 			boolean isUserStatusTrue = userIssueManager.getUserStatus(userElement);
+            String nameToAddToArray = bookIssueManager.readBooksToArray().get(bookElement)[2];
 		
 			if (isUserStatusTrue) {
-				String nameToAddToArray = getBookElement.get(bookElement)[2];
 				userIssueManager.updateUserCheckoutRecords(userElement,nameToAddToArray);
 				return;
 			}
 			userIssueManager.setUserStatus(userElement);
-			String nameToAddToArray = getBookElement.get(bookElement)[2];		
 			userIssueManager.updateUserCheckoutRecords(userElement,nameToAddToArray);
 			return;
 		}
@@ -123,17 +117,11 @@ public class Library {
 	
 	public void returnBook(String bookID, String userID) {
 		
-		
-		List<String[]> getBookElement = bookIssueManager.readBooksToArray();		
-		int bookElement = bookIssueManager.searchBookID(getBookElement, bookID);
-		
-		List<String[]> getUserElement = userIssueManager.readUsersToArray();
-		int userElement = userIssueManager.searchBookID(getUserElement, userID);
-		
-		if (bookElement == -1 || userElement == -1) {
-			System.out.println("Error: The Book ID or User ID you entered could not be found.");
-			return;
-		}
+		int[] elements = findBookAndUser(bookID, userID);
+        if (elements == null) return; 
+
+        int bookElement = elements[0];
+        int userElement = elements[1];
 		
 		Boolean isBookStatusTrue = bookIssueManager.getBookStatus(bookElement);
 		
@@ -142,8 +130,8 @@ public class Library {
 			Boolean hasUserBorrowedBooks = userIssueManager.getUserStatus(userElement);
 			
 			if (hasUserBorrowedBooks) {
-				
-				String bookName = getBookElement.get(bookElement)[2];
+
+				String bookName = bookIssueManager.readBooksToArray().get(bookElement)[2];
 				bookIssueManager.updateBookStatus(bookElement);
 				userIssueManager.removeBookFromUserRecords(userElement, bookName);
 				
@@ -185,7 +173,21 @@ public class Library {
 		}
 	}
 	
-	
+	private int[] findBookAndUser(String bookID, String userID) {
+		
+		List<String[]> getBookElement = bookIssueManager.readBooksToArray();
+        int bookElement = bookIssueManager.searchBookID(getBookElement, bookID);
+
+        List<String[]> getUserElement = userIssueManager.readUsersToArray();
+        int userElement = userIssueManager.searchBookID(getUserElement, userID);
+
+        if (bookElement == -1 || userElement == -1) {
+            System.out.println("Error: The Book ID or User ID you entered could not be found.");
+            return null; 
+        }
+
+        return new int[]{bookElement, userElement};
+	}
 	
 	
 	
